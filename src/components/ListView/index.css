@@ -1,0 +1,14 @@
+.trackName {
+  width: 100%;
+}
+.serialNo {
+  vertical-align: middle;
+}
+.List {
+  margin: 2%;
+}
+.eachAudio {
+  border-bottom: 0.1px solid grey;
+  margin:4px;
+
+}
