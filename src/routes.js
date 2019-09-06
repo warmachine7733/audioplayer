@@ -7,6 +7,7 @@ import IndividualPlay from "./containers/IndividualPlay";
 // import Toaster from "./components/UI/Toaster/Toaster";
 import List from "./containers/List";
 import Header from "./components/Header";
+import Upload from "./containers/Upload"
 
 // import RouteHandler from "./commons/RouteHandler";
 class Routes extends React.Component {
@@ -17,7 +18,8 @@ class Routes extends React.Component {
           {/* <Route path="/title" component={TitleScreen} /> */}
 
           <Route exact path="/" component={List} />
-          <Route exact path="/individualPlay" component={IndividualPlay} />
+          <Route exact path="/individualPlay/:id" component={IndividualPlay} />
+          <Route exact path="/upload" component={Upload} />
           {/* <Route exact component={Header} /> */}
         </Switch>
       </HashRouter>

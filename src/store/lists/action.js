@@ -15,13 +15,4 @@ export const getPlaylist = () => {
     }
   };
 };
-export const selectedAudioToPlay = data => {
-  return dispatch => {
-    try {
-      // console.log("fired", data);
-      dispatch({ type: "STORE_SELECTED_AUDIO", data });
-    } catch (e) {
-      console.log(e);
-    }
-  };
-};
+

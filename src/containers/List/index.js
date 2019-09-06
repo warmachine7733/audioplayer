@@ -1,7 +1,8 @@
 import React from "react";
 import ListView from "../../components/ListView/";
 import { connect } from "react-redux";
-import { getPlaylist, selectedAudioToPlay } from "../../store/lists/action";
+import { getPlaylist } from "../../store/lists/action";
+import { selectedAudioToPlay } from "../../store/individualPlay/action";
 
 class List extends React.Component {
   render() {

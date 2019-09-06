@@ -5,7 +5,8 @@ const ListView = props => {
   const { playlist, selectedAudioToPlay } = props;
   const selectedAudioToPlayAndRoute = data => {
     selectedAudioToPlay(data);
-    props.history.push("/individualPlay");
+    // console.log("data", data);
+    props.history.push(`/individualPlay/${data._id}`);
   };
   return (
     <div className="List">
