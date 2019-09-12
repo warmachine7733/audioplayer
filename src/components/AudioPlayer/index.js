@@ -1,11 +1,19 @@
 import React from "react";
 import "./index.css";
 import { Link } from "react-router-dom";
+import MusicTimeFormatted from "../../commons/MusicTimeFormatted";
 
 class AudioPlayer extends React.Component {
   render() {
-    const { url, title, cover, artist } = this.props.audio;
-    const { play, pauseAndPlay, muteAndUnmute, mute } = this.props;
+    const { url, title, cover, artist, duration } = this.props.audio;
+    const {
+      play,
+      pauseAndPlay,
+      muteAndUnmute,
+      mute,
+      handleCurrentTimerAndProgressBar,
+      currentPlayedTime
+    } = this.props;
     console.log("props in indi", this.props);
 
     return (
@@ -46,7 +54,10 @@ class AudioPlayer extends React.Component {
               <i className="col-2 material-icons" onClick={muteAndUnmute}>
                 {mute ? "volume_off" : "volume_up"}
               </i>
-              <div className="col-2 timer">0:30</div>
+              <div className="col-2 timer">
+                <MusicTimeFormatted duration={currentPlayedTime} />/
+                <MusicTimeFormatted duration={duration} />
+              </div>
             </div>
             <div className="progressBar">
               <progress className="progress" value="20" max="100"></progress>
@@ -85,11 +96,9 @@ class AudioPlayer extends React.Component {
     );
   }
   componentDidMount() {
-    console.log(this.refs.player.duration);
+    this.props.handleCurrentTimerAndProgressBar();
   }
-  componentDidCatch() {
-    console.log(this.refs.player.duration);
-  }
+
   playAndPauseMusic = nextProps => {
     if (nextProps.play) {
       this.refs.player.play();

@@ -9,7 +9,8 @@ import AudioPlayer from "../../components/AudioPlayer";
 import {
   getSelectedAudioFromServer,
   pauseAndPlay,
-  muteAndUnmute
+  muteAndUnmute,
+  handleCurrentTimerAndProgressBar
 } from "../../store/individualPlay/action";
 import "./index.css";
 
@@ -32,14 +33,17 @@ const mapStateToProps = state => {
   return {
     audio: state.individualPlay.selectedAudio,
     play: state.individualPlay.play,
-    mute: state.individualPlay.mute
+    mute: state.individualPlay.mute,
+    currentPlayedTime: state.individualPlay.currentPlayedTime
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
     getSelectedAudioFromServer: id => dispatch(getSelectedAudioFromServer(id)),
     pauseAndPlay: () => dispatch(pauseAndPlay()),
-    muteAndUnmute: () => dispatch(muteAndUnmute())
+    muteAndUnmute: () => dispatch(muteAndUnmute()),
+    handleCurrentTimerAndProgressBar: () =>
+      dispatch(handleCurrentTimerAndProgressBar())
   };
 };
 

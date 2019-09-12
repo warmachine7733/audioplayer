@@ -9,6 +9,11 @@
 }
 .eachAudio {
   border-bottom: 0.1px solid grey;
-  margin:4px;
-
+  margin: 4px;
+}
+.artist {
+  font-size: "10px";
+}
+.trackName {
+  font-size: "12px";
 }

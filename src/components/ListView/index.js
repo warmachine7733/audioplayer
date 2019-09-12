@@ -1,8 +1,11 @@
 import React from "react";
 import "./index.css";
+import MusicTimeFormatted from "../../commons/MusicTimeFormatted";
+import ArtistNameFormatted from "../../commons/ArtistNameFormatted";
 
 const ListView = props => {
   const { playlist, selectedAudioToPlay } = props;
+  console.log("props", props);
   const selectedAudioToPlayAndRoute = data => {
     selectedAudioToPlay(data);
     // console.log("data", data);
@@ -21,7 +24,7 @@ const ListView = props => {
               <div className="col-3">
                 <div className="row">
                   <div className="col serialNo">
-                    <text>1</text>
+                    <text>{i + 1}</text>
                   </div>
                   <div className=" col thumbnail">
                     <img
@@ -38,11 +41,15 @@ const ListView = props => {
 
               <div className="col-9 row">
                 <div className="col-8 details">
-                  <div className="trackName">place unknown</div>
-                  <div className="artist">big z</div>
+                  <div className="trackName">{each.title}</div>
+                  <div className="artist">
+                    <ArtistNameFormatted artist={each.artist} />
+                  </div>
                 </div>
                 <div className="col-2 options">
-                  <div className="duration">4:32</div>
+                  <div className="duration">
+                    <MusicTimeFormatted duration={each.duration} />
+                  </div>
                 </div>
                 <div className="col-2">
                   <div className="offline">
