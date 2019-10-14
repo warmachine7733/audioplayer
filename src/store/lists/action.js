@@ -4,7 +4,7 @@ export const getPlaylist = () => {
   return async dispatch => {
     try {
       let streamServer = "http://localhost:4000";
-      const requestUrl = `${streamServer}/getAudio/`;
+      const requestUrl = `${streamServer}/getAudio/?next=6`;
       const response = await axios.get(requestUrl);
       let data = response.data;
       dispatch({ type: "STORE_MUSICS", data });
@@ -15,4 +15,3 @@ export const getPlaylist = () => {
     }
   };
 };
-

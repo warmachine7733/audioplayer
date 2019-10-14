@@ -3,7 +3,39 @@ import "./index.css";
 import { Link } from "react-router-dom";
 import MusicTimeFormatted from "../../commons/MusicTimeFormatted";
 
+// class CustomPlayer extends React.Component {
+//   components = {
+//     feed: Feed,
+//     entertainment: Entertainment,
+//     news: News,
+//     games: Games,
+//     payments: Payments
+//   };
+//   render() {
+//     const TagName = this.components[this.props.tag || "foo"];
+//     return <TagName {...this.props} />;
+//   }
+// }
+
 class AudioPlayer extends React.Component {
+  state = {
+    seekedDuration: 0
+  };
+  changeProgress = e => {
+    // console.log("ref", this.refs.progressBar.getBoundingClientRect().width);
+
+    // console.log("fired", e.clientX);
+    let audioDuration = this.props.audio.duration;
+    let widthOfSeeker = this.refs.progressBar.getBoundingClientRect().width;
+    let positionClicked = e.clientX;
+    let seekedDuration = Math.round(
+      (audioDuration / widthOfSeeker) * positionClicked
+    );
+    console.log("go to", seekedDuration, "ll", this.props.currentPlayedTime);
+    this.props.handleCurrentTimerAndProgressBar({ seekedDuration });
+    this.refs.player.currentTime = seekedDuration;
+    this.setState({ seekedDuration });
+  };
   render() {
     const { url, title, cover, artist, duration } = this.props.audio;
     const {
@@ -14,7 +46,7 @@ class AudioPlayer extends React.Component {
       handleCurrentTimerAndProgressBar,
       currentPlayedTime
     } = this.props;
-    console.log("props in indi", this.props);
+    // console.log("props in indi", this.props);
 
     return (
       <div>
@@ -55,12 +87,22 @@ class AudioPlayer extends React.Component {
                 {mute ? "volume_off" : "volume_up"}
               </i>
               <div className="col-2 timer">
-                <MusicTimeFormatted duration={currentPlayedTime} />/
+                <MusicTimeFormatted duration={this.state.seekedDuration} />/
                 <MusicTimeFormatted duration={duration} />
               </div>
             </div>
             <div className="progressBar">
-              <progress className="progress" value="20" max="100"></progress>
+              <progress
+                ref="progressBar"
+                className="progress"
+                value={Math.floor(currentPlayedTime)}
+                // value={
+                //   this.state.seekedDuration ? this.state.seekedDuration : 0
+                // }
+                max={duration}
+                onClick={e => this.changeProgress(e)}
+                onDrag={e => this.changeProgress(e)}
+              ></progress>
             </div>
             <div className="container controls">
               <div className="row">
@@ -96,14 +138,19 @@ class AudioPlayer extends React.Component {
     );
   }
   componentDidMount() {
-    this.props.handleCurrentTimerAndProgressBar();
+    this.props.handleCurrentTimerAndProgressBar({
+      seekedDuration: this.state.seekedDuration
+    });
   }
 
   playAndPauseMusic = nextProps => {
     if (nextProps.play) {
       this.refs.player.play();
+      // console.log("time", this.refs.player.currentTime);
+      //
     } else {
       this.refs.player.pause();
+      // console.log("time", this.refs.player.currentTime);
     }
   };
   muteAndUnmuteMusic = nextProps => {

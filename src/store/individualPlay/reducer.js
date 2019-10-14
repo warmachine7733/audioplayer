@@ -1,4 +1,9 @@
-const initialState = { selectedAudio: null, play: true, mute: false,currentPlayedTime:0 };
+const initialState = {
+  selectedAudio: null,
+  play: true,
+  mute: false,
+  currentPlayedTime: 0
+};
 export const individualPlay = (state = initialState, action) => {
   switch (action.type) {
     case "STORE_SELECTED_AUDIO":
@@ -16,11 +21,11 @@ export const individualPlay = (state = initialState, action) => {
         ...state,
         mute: !state.mute
       };
-     case "UPDATE_CURRENT_PLAYED_TIME":
-       return{
-         ...state,
-         currentPlayedTime:action.currentPlayedTime
-       } 
+    case "UPDATE_CURRENT_PLAYED_TIME":
+      return {
+        ...state,
+        currentPlayedTime: action.modTime
+      };
     default:
       return state;
   }

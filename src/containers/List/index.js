@@ -13,7 +13,7 @@ class List extends React.Component {
     );
   }
   componentDidMount() {
-    this.props.getPlaylist();
+    if (this.props.playlist.length === 0) this.props.getPlaylist();
   }
 }
 

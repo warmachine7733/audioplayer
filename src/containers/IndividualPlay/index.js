@@ -42,8 +42,8 @@ const mapDispatchToProps = dispatch => {
     getSelectedAudioFromServer: id => dispatch(getSelectedAudioFromServer(id)),
     pauseAndPlay: () => dispatch(pauseAndPlay()),
     muteAndUnmute: () => dispatch(muteAndUnmute()),
-    handleCurrentTimerAndProgressBar: () =>
-      dispatch(handleCurrentTimerAndProgressBar())
+    handleCurrentTimerAndProgressBar: data =>
+      dispatch(handleCurrentTimerAndProgressBar(data))
   };
 };
 

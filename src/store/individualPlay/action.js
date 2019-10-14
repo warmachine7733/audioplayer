@@ -31,6 +31,7 @@ export const pauseAndPlay = () => {
   return async dispatch => {
     try {
       dispatch({ type: "PAUSE_AND_PLAY" });
+      dispatch(handleCurrentTimerAndProgressBar());
     } catch (e) {
       console.log(e);
     }
@@ -41,27 +42,28 @@ export const muteAndUnmute = () => {
     type: "MUTE_AND_UNMUTE"
   };
 };
-export const handleCurrentTimerAndProgressBar = () => {
+export const handleCurrentTimerAndProgressBar = data => {
   return async (dispatch, getState) => {
     try {
       const currentAudioDuration = getState().individualPlay.selectedAudio.url;
-      let currentPlayedTime = getState().individualPlay.currentPlayedTime;
+
       let play = getState().individualPlay.play;
-      // let timer = setInterval(() => {
-      //   console.log("play", play);
-      //   if (play) {
-      //     currentPlayedTime++;
-      //     // console.log("x", x);
-      //     dispatch({ type: "UPDATE_CURRENT_PLAYED_TIME", currentPlayedTime });
-      //     if (currentPlayedTime === currentAudioDuration) {
-      //       console.log("fire ");
-      //       // dispatch({ type: "STRAT_BROADCAST" });
-      //       clearInterval(timer);
-      //     }
-      //   } else {
-      //     console.log("stop timer");
-      //   }
+      console.log("play", data);
+  
       // }, 1000);
+      let timer = setInterval(() => {
+        let currentPlayedTime = getState().individualPlay.currentPlayedTime
+        
+        if (currentPlayedTime === currentAudioDuration) {
+          // console.log("fire ");
+
+          clearInterval(timer);
+        } else {
+          let modTime = currentPlayedTime + 1;
+
+          dispatch({ type: "UPDATE_CURRENT_PLAYED_TIME", modTime });
+        }
+      }, 1000);
     } catch (e) {}
   };
 };
